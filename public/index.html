@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- halo -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ducksheets | Parse Bank Statement PDF to CSV</title>
+    <meta name="description" content="One-Stop Solution for Converting Bank E-Statement PDFs to CSVs. Easily parse e-statements from BCA, BRI, Mandiri, Permata, BLU, and CIMB Niaga Bank into CSV format.">
+    <link rel="icon" href="./logo/ducksheets2.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="/">
+                <img src="./logo/ducksheets.svg" alt="DuckSheets" class="desktop-logo">
+            </a>
+            <a href="/">
+                <img src="./logo/ducksheets2.svg" alt="DuckSheets" class="mobile-logo">
+            </a>
+        </div>
+        <div class="navbar-links">
+            <a href="https://forms.gle/2qJxo9L6dYbFcJ5w7" class="navbar-link" target="_blank" rel="noopener noreferrer">Request</a>
+            <a href="https://saweria.co/ferdinandnat" class="navbar-link" target="_blank" rel="noopener noreferrer">Support Us</a>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="last-updated-container">
+            <div class="radar">
+                <div class="pulse-container">
+                    <div class="outer-circle"></div>
+                    <div class="middle-circle"></div>
+                </div>
+                <div class="inner-circle"></div>
+            </div>
+            <div class="last-updated">Supports 6 banks</div>
+        </div>
+        <div class="header">
+            <h1>
+                One-Stop <span class="blue">Solution</span> for <br class="desktop-break">
+                Converting Bank PDF to CSV
+            </h1>
+        </div>
+        <div class="feature-tabs" role="tablist" aria-label="Conversion mode">
+            <button type="button" class="feature-tab active" data-mode="full" role="tab" aria-selected="true">
+                Semua Transaksi
+            </button>
+            <button type="button" class="feature-tab" data-mode="income-only" role="tab" aria-selected="false">
+                Penghasilan Saja (No DB)
+            </button>
+        </div>
+        <p id="feature-mode-description" class="feature-mode-description">
+            Semua transaksi DEBIT dan CREDIT akan tetap masuk ke output.
+        </p>
+        <div id="error-message" class="error-message"></div>
+        <div id="success-message" class="success-message"></div>
+        <div class="container">
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="bank-selector-container">
+                    <div class="bank-selector-label">Default bank for new client boxes</div>
+                    <div class="bank-selector-wrapper">
+                        <select id="bankSelector" name="bank">
+                            <option value="">No default</option>
+                            <option value="BCA">Bank BCA</option>
+                            <option value="BRI">Bank BRI</option>
+                            <option value="Mandiri">Bank Mandiri</option>
+                            <option value="Permata">Bank Permata</option>
+                            <option value="BLU">Bank BLU</option>
+                            <option value="CIMB">Bank CIMB Niaga</option>
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e1e1e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                    </div>
+                </div>
+                <div class="upload-container">
+                    <div class="batch-toolbar">
+                        <button type="button" id="addClientBox" class="secondary-button">+ Add Client Box</button>
+                        <p class="batch-help">Set bank, optional PDF password, and output name per client box. Max 12 PDFs per box.</p>
+                    </div>
+                    <div id="clientBatches" class="client-batches"></div>
+                    <div id="fileCount"></div>
+                    <button type="submit" id="proceedButton" disabled>Proceed</button>
+                </div>
+                <div class="privacy-notice-container">
+                    <p class="privacy-notice desktop-notice">
+                        All file processing happens on our server securely. Minor 
+                        disparity may appear in some cases, but the results are generally reliable.
+                    </p>
+                    <p class="learn-more">
+                        <a href="/policy.html"> <span class="blue">Learn More</span></a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <iframe id="pdfViewer" width="100%" height="500px"></iframe>
+        </div>
+    </div>
+    <div id="csvPreviewModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="preview-title"></div>
+            <div id="csvPreviewContent"></div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="client.js" type="module"></script>
+</body>
+<footer class="credit-footer">
+    <div class="credit-container">
+        <span>Built by Ferdinand Sanjaya</span>
+        <a href="https://www.linkedin.com/in/ferdinand-sanjaya/" target="_blank" rel="noopener noreferrer">
+            <img src="./logo/linkedin.svg" alt="LinkedIn" class="social-icon">
+        </a>
+    </div>
+</footer>
+</html>
