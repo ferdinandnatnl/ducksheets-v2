@@ -1,7 +1,7 @@
 import { PdfReader } from "pdfreader";
 
 export function convertBriPdfToCsv(pdfPath, fileName, callback) {
-    let csvContent = "tanggal,keterangan,status,value\n";
+    let csvContent = "tanggal,keterangan,status,value,debit,kredit\n";
     const pdfReader = new PdfReader();
     let isTransactionSection = false;
     let currentEntry = {};
@@ -69,6 +69,8 @@ export function convertBriPdfToCsv(pdfPath, fileName, callback) {
                     quoteIfNeeded(entry.keterangan),
                     quoteIfNeeded("DEBIT"),
                     quoteIfNeeded(formattedValue),
+                    quoteIfNeeded(formattedValue), // debit
+                    quoteIfNeeded("0"),             // kredit
                 ].join(",") + "\n";
             } else if (entry.kredit > 0) {
                 const formattedValue = formatRupiah(entry.kredit);
@@ -77,6 +79,8 @@ export function convertBriPdfToCsv(pdfPath, fileName, callback) {
                     quoteIfNeeded(entry.keterangan),
                     quoteIfNeeded("CREDIT"),
                     quoteIfNeeded(formattedValue),
+                    quoteIfNeeded("0"),             // debit
+                    quoteIfNeeded(formattedValue),  // kredit
                 ].join(",") + "\n";
             }
         }
